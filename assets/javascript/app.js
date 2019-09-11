@@ -1,4 +1,4 @@
-  var firebaseConfig = {
+var firebaseConfig = {
     apiKey: "AIzaSyDWWf5m_Lcpo2xo1bfuoF_1o_rFKk4z-3g",
     authDomain: "train-time-16df7.firebaseapp.com",
     databaseURL: "https://train-time-16df7.firebaseio.com",
@@ -6,28 +6,49 @@
     storageBucket: "train-time-16df7.appspot.com",
     messagingSenderId: "938576926875",
     appId: "1:938576926875:web:fb68887c8e4eb06456ce3e"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-  // variable to reference database
-  var database = firebase.database();
+// variable to reference database
+var database = firebase.database();
 
-  // variable to grab current time
-  var currentTime = moment().format();
+// variable to grab current time
+var currentTime = moment().format();
 
-  // log the current time
-  console.log("Current Time is: " + currentTime);
+// log the current time
+console.log("Current Time is: " + currentTime);
 
-  $("#click-button").on("click", function() {
+$("#click-button").on("click", function() {
 
     event.preventDefault();
 
     // variables to grab users entry from form fields
     var trainNameForm = $("#trainNameForm").val().trim();
     var destinationForm = $("#destinationForm").val().trim();
-    var trainTimeForm = moment ($("#trainTimeForm").val().trim(), "HH:mm").format("HH:mm");
+    var trainTimeForm = moment($("#trainTimeForm").val().trim(), "HH:mm").format("HH:mm");
     var frequencyForm = $("#frequencyForm").val().trim();
+
+    // ensure all form fields have an input value
+    if (trainNameForm == "") {
+        alert("Enter a train name!");
+        return false;
+    }
+    
+    if (destinationForm == "") {
+        alert("Enter a destination!");
+        return false;
+    }
+
+    if (trainTimeForm == "") {
+        alert("Enter a first train time!");
+        return false;
+    }
+
+    if (frequencyForm == "") {
+        alert("Enter a frequency!");
+        return false;
+    }
 
     // variable to hold inputs
     var newTrain = {
@@ -45,15 +66,15 @@
     console.log(newTrain.first);
     console.log(newTrain.frequency);
 
-    //clear input form fields
+    // clear input form fields
     $("#trainNameForm").val("");
     $("#destinationForm").val("");
     $("#trainTimeForm").val("");
     $("#frequencyForm").val("");
 
-  });
+});
 
-  database.ref().on("child_added", function(childSnapshot, prevChildKey){
+database.ref().on("child_added", function (childSnapshot, prevChildKey) {
 
     console.log(childSnapshot.val());
 
@@ -80,6 +101,9 @@
     console.log("The train is this many minutes away: " + minutesAway);
 
     // variable for converting when the next arrival will be
-    var nextArrival = moment(currentTime).add(minutesAway, "minutes").format("hh:mm A");
+    var nextArrival = moment(currentTime).add(minutesAway, "minutes").format("HH:mm A");
     console.log("The next arriving train is: " + nextArrival);
-  })
+
+    // add new entrys to the table from form field entrys
+    $("#trainScheduleTable > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainFrequency + "</td><td>" + nextArrival + "</td><td>" + minutesAway + "</td><tr>");
+})
