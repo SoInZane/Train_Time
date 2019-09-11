@@ -7,9 +7,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Red+Hat+Display&display=swap" rel="stylesheet">
     </head>
     <body>
-
+            <div class="wrapper">
+	
+                    <div class="jumbotron">
+                      <h1>Full Steam Ahead!</h1>
+                      <p class="panelHeader">Chugga Chugga, Choo Choo!</p>
+                    </div>
+                    
+                    <div class="panel panel-default">
+                      <div class="panel-heading">Current Train Schedule</div>
+                      <div class="panel-body">
+                        <table class="table table-striped" id="trainScheduleTable">
+                              <thead>
+                                <tr>
+                                  <th>Train Name</th>
+                                  <th>Destination</th>
+                                  <th>Frequency (min)</th>
+                                  <th>Next Arrival</th>
+                                  <th>Minutes Away</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Add Train</div>
+                        <div class="panel-body">
+                            <div class="form">
+                                <form>
+                                  <div class="form-group">
+                                    <label for="trainNameForm">Train Name</label>
+                                    <input type="text" class="form-control" id="trainNameForm">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="destinationForm">Destination</label>
+                                    <input type="text" class="form-control" id="destinationForm">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="firstTrainTimeForm">First Train Time (HH:mm - Military Time)</label>
+                                    <input type="text" class="form-control" id="trainTimeForm">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="frequency">Frequency (min)</label>
+                                    <input type="text" class="form-control" id="frequencyForm">
+                                  </div>
+                                  <button type="submit" class="btn btn-default" id="click-button">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
 
 
 
