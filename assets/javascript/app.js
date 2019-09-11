@@ -19,7 +19,7 @@ var currentTime = moment().format();
 // log the current time
 console.log("Current Time is: " + currentTime);
 
-$("#click-button").on("click", function() {
+$("#click-button").on("click", function () {
 
     event.preventDefault();
 
@@ -34,7 +34,7 @@ $("#click-button").on("click", function() {
         alert("Enter a train name!");
         return false;
     }
-    
+
     if (destinationForm == "") {
         alert("Enter a destination!");
         return false;
@@ -85,7 +85,7 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey) {
     var trainFrequency = childSnapshot.val().frequency;
 
     // variable for conversion of time
-    var trainTimeConverted = moment(trainTime, "HH:mm");
+    var trainTimeConverted = moment(trainTime, "HH:mm A");
     console.log(trainTimeConverted);
 
     // variable for difference in time
@@ -100,10 +100,12 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey) {
     var minutesAway = Math.abs(timeDifference % frequencyMinutes);
     console.log("The train is this many minutes away: " + minutesAway);
 
+    var minutesUntil = frequencyMinutes - minutesAway;
+
     // variable for converting when the next arrival will be
-    var nextArrival = moment(currentTime).add(minutesAway, "minutes").format("HH:mm A");
+    var nextArrival = moment().add(minutesAway, "minutes").format("HH:mm A");
     console.log("The next arriving train is: " + nextArrival);
 
     // add new entrys to the table from form field entrys
     $("#trainScheduleTable > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainFrequency + "</td><td>" + nextArrival + "</td><td>" + minutesAway + "</td><tr>");
-})
+});
